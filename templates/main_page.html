@@ -1,31 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Lemmings Company</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style_main_page.css') }}">
-    </head>
-    <body>
-        <header>
-            <div class="container">
-                <img class="logo" src="Lemming.png" alt="Logo" width="50px" height="50px">
-                <h4 class="logo_name">Lemmings Company</h4>
-                <nav>
-                    <ul>
-                        <li><a class="catalog">Каталог</a></li>
-                        <li><a class="news">Новости</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
 
-        <div class="main">
-            {% for st in stock %}
-                <a class="stock" href="http://127.0.0.1:8080/company/sber">{{ st }}</a>
-            {% endfor %}
-        </div>
+<head>
+	<meta charset="utf-8">
+	<title>Lemmings Company</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style_main_page.css') }}">
+</head>
 
-        <!-- <div class="album py-5 bg-light">
+<body>
+	<div id="header">
+		<img class="logo" src="Lemming.png" alt="Logo" width="50px" height="50px">
+		<h4 class="logo_name">Lemmings Company</h4>
+		<nav>
+			<ul>
+				<li><a class="catalog">Каталог</a></li>
+				<li><a class="news">Новости</a></li>
+			</ul>
+		</nav>
+	</div>
+	<div id="main">
+		{% for st in stock %}
+		<a class="stock" href="http://127.0.0.1:8080/company/sber">{{ st }}</a>
+		{% endfor %}
+	</div>
+
+	<!-- <div class="album py-5 bg-light">
             <div class="container">
         
               <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -179,5 +178,6 @@
             </div>
           </div> -->
 
-    </body>
+</body>
+
 </html>
