@@ -1,12 +1,8 @@
 from flask import Flask, render_template
+from data_importer import generate_both
+import os.path
 
 app = Flask(__name__)
-
-def load_graph_to_png(name_company, file_name):
-    m1 = MoexImporter()  
-    sec = MoexSecurity(name_company, m1)
-    candles_df = sec.getCandleQuotesAsDataFrame(date(2023, 1, 1), date(2024, 1, 24), interval=MoexCandlePeriods.Period1Day, board=None) 
-    mpf.plot(candles_df, title=name_company, type="candle", mav=10, style="yahoo", savefig=file_name)
 
 @app.route("/")
 def home_page():
@@ -22,24 +18,27 @@ def home_page():
 
 @app.route("/company/<name>")
 def user(name):
-    file = open(f'companies/{name}.txt', 'r')
-    company = file.readlines()
+    # file_path_txt = f'companies/{name}.txt';  
+    # file_path_png = f'companies/{name}.png';
+    # if not(os.path.exists(file_path_txt)):
+    #     create_data(name, 2022, 1, 1, 2024, 1, 1, 3)
+    # if not(os.path.exists(file_path_png)):
+    #     load_graph_to_png(name, name + ".png")
+    # file = open(f'companies/{name}.txt', 'r');
+    # company = file.readlines()
+    # file.close()
+    generate_both(name)
+    file = open(name + ".txt", 'r')
+    data = file.split("\n")
     file.close()
-    args = company[0].split(" ")
-    for i in range(len(args)):
-        sym = args[i]
-        args[i] = sym[1:len(sym)-1]
-    args[-1] = args[-1][0:len(args[-1]) - 1]
-    for i in range(1, len(company)):    
-        a = company[i].split(" ")
-        company[i] = [float(j) for j in a]  
+    for i in range(1, len(data)):
+        sym = data[i].split(" ")
     kwargs = dict()
-    kwargs["args"] = args 
-    kwargs["ticker"] = company[1:]
-    kwargs["name"] = "Sberbank"
-    kwargs["id"] = "SBER"
-    kwargs["img"] = "SBER.png"
-    #load_graph_to_png("SBER", "SBER.png")
+    kwargs["args"] = ["DATA", "OPEN", "CLOSE", "LOW", "HIGH", "VALUE", "QUANTITY"]
+    kwargs["ticker"] = data[1:]
+    kwargs["name"] = name
+    kwargs["id"] = name
+    kwargs["img"] = name + ".png"
     return render_template('stock.html', **kwargs)
 
 if __name__ == "__main__":
