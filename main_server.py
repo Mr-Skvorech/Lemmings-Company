@@ -1,8 +1,10 @@
 from flask import Flask, render_template
 from data_importer import generate_both
-import os.path
+import os
 
 app = Flask(__name__)
+
+img = os.path.join('static', 'images')
 
 @app.route("/")
 def home_page():
@@ -13,6 +15,9 @@ def home_page():
     companies = file.read()
     comp = companies.split("\n")
     kwargs["stock"] = comp
+    kwargs["image"] = os.path.join(img, 'sber.png')
+    kwargs["logo"] = os.path.join(img, 'Lemming.png')
+    kwargs["acc"] = os.path.join(img, "Account.png")
     #
     return render_template("main_page.html", **kwargs)
 
