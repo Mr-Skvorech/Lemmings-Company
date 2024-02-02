@@ -8,7 +8,7 @@ img = os.path.join('static', 'img')
 
 def init_kwargs():
     kwargs = dict()
-    kwargs["Сбербанк (SBER)"] = os.path.join(img, 'sber.png')
+    kwargs["Сбербанк (SBER)"] = os.path.join(img, 'sberr.png')
     kwargs["Лукойл (LKOH)"] = os.path.join(img, 'lukoil.png')
     kwargs["Газпром (GAZP)"] = os.path.join(img, 'gazprom.png')
     kwargs["Новатэк (NVTK)"] = os.path.join(img, 'novatek.png')
@@ -57,22 +57,23 @@ def home_page():
     #
     filename = "list_of_comp" + ".txt"
     f = open(filename)
-    companies = f.read()
+    comp = f.readlines()
     f.close()
-    comp = companies.split("\n")
+    print(*comp)
     stock = []
     for i in range(15):
         sym = comp[i]
         para = dict()
         para["name"] = sym
         s = ""
-        for i in range(-2, -len(sym), -1):
+        for i in range(-3, -len(sym), -1):
             if (sym[i] == '('):
                 break
             s += sym[i]
         s = s[::-1]
+        print(sym[0:len(sym) - 1])
         para["ticker"] = s
-        para["fil"] = kwargs.get(sym, os.path.join(img, 'sber.png'))
+        para["fil"] = kwargs.get(sym[0:len(sym) - 1], os.path.join(img, 'sberr.png'))
         para["link"] = "/companyMOEX/" + para["ticker"]
         stock.append(para)
     for i in range(15, 20):
@@ -85,8 +86,9 @@ def home_page():
                 break
             s += sym[i]
         s = s[::-1]
+        print(sym[0:len(sym) - 1])
         para["ticker"] = s
-        para["fil"] = kwargs.get(sym, os.path.join(img, 'sber.png'))
+        para["fil"] = kwargs.get(sym[0:len(sym) - 1], os.path.join(img, 'sberr.png'))
         para["link"] = "/companyNYSE/" + para["ticker"]
         stock.append(para)
     kwargs["stock"] = stock
@@ -109,6 +111,7 @@ def user(id):
     kwargs["args"] = ["DATA", "OPEN", "CLOSE", "LOW", "HIGH", "VALUE", "QUANTITY"]
     kwargs["name"] = kwargs[id]
     kwargs["id"] = id
+    kwargs["image"] = os.path.join(img, id + ".png")
     kwargs["graph"] = "SBER.png"
     kwargs["logo"] = os.path.join(img, 'Lemming.png')
     kwargs["acc"] = os.path.join(img, "Account.png")
