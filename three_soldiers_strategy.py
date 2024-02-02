@@ -11,7 +11,7 @@ class ThreeSoldiersStrategy(Strategy):
     coef_not_factor = 1.5
     investements = []
     def __init__(self, period, matter_period, feed_base, coef_not_factor=1.5):
-        self.__init__("ThreeSoldiersStrategy")
+        self.strategy_name = "ThreeSoldiersStrategy"
         self.period = period
         self.matter_peiod = matter_period
         for candle in feed_base:
@@ -29,35 +29,34 @@ class ThreeSoldiersStrategy(Strategy):
         Refactor_Bounds()
 
     def local_Process(self, glass, curprice):
-        if (2 * curpice > self.localmin + self.localmax):
-            self.localmax += 1 * (curpice - self.localmin)
         first = self.feed[-3]
         second = self.feed[-2]
         third = self.feed[-1]
-        buy = (money / 4) / curprice
+        buy = min((self.money / 8), self.total_money * 0.10) / curprice
         sell = 0
-        if (first.open - first.close > 0):
+        if (first.open - first.close >= 0):
             buy = 0
-        if (second.open - second.close > 0):
+        if (second.open - second.close >= 0):
             buy = 0
-        if (third.open - third.close > 0):
+        if (third.open - third.close >= 0):
             buy = 0
-        if ((third.open - third.close) / (second.open - second.close) > coef_not_factor):
+        if (buy != 0 and (third.open - third.close) / (second.open - second.close) > self.coef_not_factor):
             buy = 0
-        orderbuy = Order(buy, curpirce, 1, -1)
+        orderbuy = Order(buy, curprice, 1, -1)
         self.ValidateOrder(orderbuy)
         ans = []
 
         ans.append(orderbuy)
-        investements.append(Order(buy, self.localmax, 0, -1))
-        neewinv = []
-        for inv in investments:
-            if (abs(curpice - inv.price) / curprice < epsilon):
+        self.investements.append(Order(buy, curprice * 1.10, 0, -1))
+        newinv = []
+        for inv in self.investements:
+            if (curprice > inv.price * (1 - self.epsilon)):
                 ordersell = Order(curprice, inv.quantity, 0, -1)
             else:
                 newinv.append(inv)
-        inv = newinv
+        self.investements = newinv
+        return ans
 
 
     def Process(self, glass, curprice):
-        return local_Process(self, glass, curprice)
+        return self.local_Process(glass, curprice)

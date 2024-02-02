@@ -4,18 +4,18 @@ from finance_structures import Candle, Order, Glass
 #универсальный класс стратегии
 class Strategy(object):
     #список всех свечек, зафиженый в стратегию
-    self.feed = []
-
+    feed = []
+    total_money = 0
 
     #наименование стратегии
-    self.strategy_name = "undefined"
-    self.period = -1
-    self.number_of_stocks = 0
-    self.money = 0
-    self.local_glass = Glass()
-    self.refactor_time = 1
-    self.cur_refactor_time = 0
-    self.my_orders = []
+    strategy_name = "undefined"
+    period = -1
+    number_of_stocks = 0
+    money = 0
+    local_glass = Glass()
+    refactor_time = 1
+    cur_refactor_time = 0
+    my_orders = []
     def __init__(self, nm, local_glass):
         self.feed = []
         self.strategy_name = nm
@@ -30,11 +30,11 @@ class Strategy(object):
 
     def Feed(self, cand):
         if (self.strategy_name == "undefined"):
-            raise("Undefined Behaviour: the strategy is either unnamed either undefined")
+            raise(BaseException("Undefined Behaviour: the strategy is either unnamed either undefined"))
         if (type(cand) != Candle):
-            raise("Type Error: attempt to feed non-candle to a Strategy template")
+            raise(BaseException("Type Error: attempt to feed non-candle to a Strategy template"))
         if (cand.is_undefined()):
-            raise("Undefined Behaviour: attempt to feed an undefined candle")
+            raise(BaseException("Undefined Behaviour: attempt to feed an undefined candle"))
         self.feed.append(cand)
         self.OnCandleAdded(cand)
 
@@ -76,3 +76,8 @@ class Strategy(object):
         else:
             self.AddMoney(-ord.quantity * ord.price)
             self.AddStock(ord.quantity)
+
+    def GetActiveMoney(self):
+        return self.money
+    def GetActiveStock(self):
+        return self.number_of_stocks

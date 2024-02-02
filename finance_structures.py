@@ -45,7 +45,7 @@ class Order(object):
     def __init__(self, quantity, price, order_type, id):
         self.price = price
         self.quantity = quantity
-        self.order_type = 0
+        self.order_type = order_type
         self.id = id
 
     def is_undefined(self):
