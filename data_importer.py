@@ -18,7 +18,7 @@ def create_data(name_company, year_begin, month_begin, day_begin, year_end, mont
     df_string_close = df_string_close.to_string(header=False)
     df_string = df_candles.to_string(header=False)
 
-    s = name_company + ".txt"
+    s = os.path.join('companies', name_company + ".txt")
     if name_company in is_exist.read():
         f = open(s, 'r+')
         f.truncate(0)
@@ -36,6 +36,7 @@ def create_data(name_company, year_begin, month_begin, day_begin, year_end, mont
     is_exist.close()
 def load_graph_to_png(name_company, file_name, year_begin, month_begin, day_begin, year_end, month_end, day_end, inter):
     m1 = MoexImporter()
+    file_name = "graphic.png"
     sec = MoexSecurity(name_company, m1)
     candles_df = sec.getCandleQuotesAsDataFrame(date(2023, 1, 1), date(2024, 1, 24),
                                                 interval=MoexCandlePeriods.Period1Day, board=None)
