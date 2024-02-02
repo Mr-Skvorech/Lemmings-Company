@@ -102,14 +102,17 @@ def user(id):
     f = open(id + ".txt", 'r')
     data = f.readlines()
     f.close()
+    tick = []
     for i in range(1, len(data)):
-        sym = data[i].split(" ")
+        sym = data[i].split()
+        tick.append(sym)
     kwargs["args"] = ["DATA", "OPEN", "CLOSE", "LOW", "HIGH", "VALUE", "QUANTITY"]
     kwargs["name"] = kwargs[id]
     kwargs["id"] = id
     kwargs["graph"] = "SBER.png"
     kwargs["logo"] = os.path.join(img, 'Lemming.png')
     kwargs["acc"] = os.path.join(img, "Account.png")
+    kwargs["ticker"] = tick
     # kwargs["image"] = kwargs.get(kwargs[kwargs[]], os.path.join(img, 'sber.png'))
     return render_template('stock.html', **kwargs)
 
