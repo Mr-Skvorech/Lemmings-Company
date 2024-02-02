@@ -1,15 +1,20 @@
-Сбербанк
-Газпром
-Лукойл
-Новатэк
-Роснефть
-Алроса
-ВТБ
-Яндекс
-МТС
-Магнит
-X5 Retail group
-Северсталь
-Сургутнефтегаз
-Татнефть
-Норильский Никель
+Сбербанк (SBER)
+Газпром (GAZP)
+Лукойл (LKOH)
+Новатэк (NVTK)
+Роснефть (ROSN)
+Алроса (ALRS)
+ВТБ (VTBR)
+Яндекс (YNDX)
+МТС (MTSS)
+Магнит (MGNT)
+X5_Retail_group (FIVE)
+Северсталь (CHMF)
+Сургутнефтегаз (SNSGS)
+Татнефть (NTATN)
+Норильский_Никель (GMKN)
+Apple (AAPL)
+Goldman_Sachs_Group (GS)
+Visa (V)
+Pfizer (PFE)
+Texas_Instruments (TXN)
