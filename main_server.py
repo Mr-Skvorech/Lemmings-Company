@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__)
 
-img = os.path.join('static', 'images')
+img = os.path.join('static', 'img')
 
 def init_kwargs():
     kwargs = dict()
@@ -32,23 +32,23 @@ def init_kwargs():
     kwargs["SBER"] = "Сбербанк"
     kwargs["LKOH"] = "Лукойл"
     kwargs["GAZP"] = "Газпром"
-    kwargs["NVTK"] = os.path.join(img, 'novatek.png')
-    kwargs["ROSN"] = os.path.join(img, 'rosneft.png')
-    kwargs["ALRS"] = os.path.join(img, 'alrosa.png')
-    kwargs["VTBR"] = os.path.join(img, 'vtb.png')
-    kwargs["YNDX"] = os.path.join(img, 'yandex.png')
-    kwargs["MTSS"] = os.path.join(img, 'mts.png')
-    kwargs["MGNT"] = os.path.join(img, 'magnit.png')
-    kwargs["FIVE"] = os.path.join(img, 'X5.png')
-    kwargs["CHMF"] = os.path.join(img, 'sever.png')
-    kwargs["SNSGS"] = os.path.join(img, 'surgut.png')
-    kwargs["NTATN"] = os.path.join(img, 'tatneft.png')
-    kwargs["GMKN"] = os.path.join(img, 'nornikel.svg')
-    kwargs["AAPL"] = os.path.join(img, 'apple.jpg')
-    kwargs["GS"] = os.path.join(img, 'gold.png')
-    kwargs["V"] = os.path.join(img, 'visa.webp')
-    kwargs["PFE"] = os.path.join(img, 'pfizer.jpg')
-    kwargs["TXN"] = os.path.join(img, 'texas.png')
+    kwargs["NVTK"] = "Новатэк"
+    kwargs["ROSN"] = "Роснефть"
+    kwargs["ALRS"] = "Алроса"
+    kwargs["VTBR"] = "ВТБ"
+    kwargs["YNDX"] = "Яндекс"
+    kwargs["MTSS"] = "МТС"
+    kwargs["MGNT"] = "Магнит"
+    kwargs["FIVE"] = "X5 Retail Group"
+    kwargs["CHMF"] = "Северсталь"
+    kwargs["SNSGS"] = "Сургутнефтегаз"
+    kwargs["NTATN"] = "Татнефть"
+    kwargs["GMKN"] = "Норильский Никель"
+    kwargs["AAPL"] = "Apple"
+    kwargs["GS"] = "Goldman Sachs Group"
+    kwargs["V"] = "Visa"
+    kwargs["PFE"] = "Pfizer"
+    kwargs["TXN"] = "Texas Instruments"
     return kwargs
 
 @app.route("/")
