@@ -61,7 +61,8 @@ def home_page():
     f.close()
     comp = companies.split("\n")
     stock = []
-    for sym in comp:
+    for i in range(15):
+        sym = comp[i]
         para = dict()
         para["name"] = sym
         s = ""
@@ -72,7 +73,21 @@ def home_page():
         s = s[::-1]
         para["ticker"] = s
         para["fil"] = kwargs.get(sym, os.path.join(img, 'sber.png'))
-        para["link"] = "/company/" + para["ticker"]
+        para["link"] = "/companyMOEX/" + para["ticker"]
+        stock.append(para)
+    for i in range(15, 20):
+        sym = comp[i]
+        para = dict()
+        para["name"] = sym
+        s = ""
+        for i in range(-2, -len(sym), -1):
+            if (sym[i] == '('):
+                break
+            s += sym[i]
+        s = s[::-1]
+        para["ticker"] = s
+        para["fil"] = kwargs.get(sym, os.path.join(img, 'sber.png'))
+        para["link"] = "/companyNYSE/" + para["ticker"]
         stock.append(para)
     kwargs["stock"] = stock
     kwargs["logo"] = os.path.join(img, 'Lemming.png')
@@ -80,7 +95,7 @@ def home_page():
     #
     return render_template("main_page.html", **kwargs)
 
-@app.route("/company/<id>")
+@app.route("/companyMOEX/<id>")
 def user(id):
     kwargs = init_kwargs()
     generate_both(id)
@@ -93,6 +108,8 @@ def user(id):
     kwargs["name"] = kwargs[id]
     kwargs["id"] = id
     kwargs["graph"] = "SBER.png"
+    kwargs["logo"] = os.path.join(img, 'Lemming.png')
+    kwargs["acc"] = os.path.join(img, "Account.png")
     # kwargs["image"] = kwargs.get(kwargs[kwargs[]], os.path.join(img, 'sber.png'))
     return render_template('stock.html', **kwargs)
 
