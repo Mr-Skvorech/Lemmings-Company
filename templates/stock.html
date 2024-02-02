@@ -4,24 +4,32 @@
 <head>
     <meta charset="UTF-8">
     <title> Lemmings Company </title>
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3745/3745273.png" type="image/png" />
+    <link rel="icon" href="{{ url_for('static', filename='images/Lemming.png') }}" type="image/png" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style_stock.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_stock.css') }}">
 </head>
 
 <body>
     <div id="header">
 		<div class="left_head">
-			<img class="logo" src="/logo" alt="Logo" width="50px" height="50px">
+			<img class="logo" src="{{logo}}" alt="Logo" width="50px" height="50px">
 			<h4 class="logo_name">Lemmings Company</h4>
 		</div>
 		<div class="right_head">
-			<nav>
+			<!-- <nav>
 				<ul>
-					<li><a class="catalog" href="#Catalog">Каталог</a></li>
-					<li><a class="news">Новости</a></li>
+					<nav>
+						<ul>
+							<li><a class="catalog" href="#Catalog">Каталог</a></li>
+							<li><a class="news">Новости</a></li>
+						</ul>
+					</nav>
+					<li><a class="account" href=""><img src="{{acc}}" width="50px" height="50px"></a></li>
 				</ul>
-			</nav>
+			</nav> -->
+			<a class="account" href=""><img src="{{acc}}" width="50px" height="50px"></a>
+			<a class="catalog" href="#Catalog">Каталог</a>
+			<a class="news">Новости</a>
 		</div>
 	</div>
     <div style="display: flex; justify-content: space-around; border: 5px solid gold;">
@@ -33,7 +41,7 @@
     </div>
     <button type="button" class="btn">{{ name }} (id: {{ id }}) </button>
     <div class="container2">
-        <img src="{{ url_for('static', filename='img/SBER.png') }}">
+        <img src="{{graph}}" alt="graphic">
         <table border="1" class="center">
             <thead>
                 <tr>
