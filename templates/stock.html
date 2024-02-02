@@ -10,6 +10,27 @@
 </head>
 
 <body>
+    <div id="header">
+		<div class="left_head">
+			<img class="logo" src="/logo" alt="Logo" width="50px" height="50px">
+			<h4 class="logo_name">Lemmings Company</h4>
+		</div>
+		<div class="right_head">
+			<nav>
+				<ul>
+					<li><a class="catalog" href="#Catalog">Каталог</a></li>
+					<li><a class="news">Новости</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+    <div style="display: flex; justify-content: space-around; border: 5px solid gold;">
+        <img src="{{ url_for('static', filename='img/SBER.png') }}" style="border-radius: 100px; box-shadow: 0 0 0 3px green, 0 0 13px #333; top: 163px; width: 200px; height: 200px; position: relative; left: 50px;">
+        <button type="button" class="btn2">Описание </button>
+        <div class="container">
+            Apple Inc. - американская компания, производитель персональных и планшетных компьютеров, аудиоплееров, телефонов, программного обеспечения. Одна из первых стала создавать персональные компьютеры и современные операционные системы. У компании очень грамотный маркетинг, который в паре с инновационными технологиями и узнаваемому дизайну сформировали культовый бренд. APPLE - первая американская компания, чья капитализация превысила 1 трлн долларов США. Это произошло во время торгов акциями компании в 2018 году. В январе 2022 года Apple стала первой компанией в мире, рыночная капитализация которой достигла 3 триллионов долларов США.
+        </div>
+    </div>
     <button type="button" class="btn">{{ name }} (id: {{ id }}) </button>
     <div class="container2">
         <img src="{{ url_for('static', filename='img/SBER.png') }}">
@@ -49,6 +70,23 @@
                     content.style.display = "none";
                 } else {
                     content.style.display = "block";
+                }
+            });
+        }
+        var coll = document.getElementsByClassName("btn2");
+        var i;
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                    // content.style = "left: 0%;";
+                    document.getElementsByClassName("btn2")[0].style = "width: 60%; height: 100%;";
+                } else {
+                    content.style.display = "block";
+                    // content.style = "left: 10%;";
+                    document.getElementsByClassName("btn2")[0].style = "width: 20%; height: 200px; left: 10%;";
                 }
             });
         }
