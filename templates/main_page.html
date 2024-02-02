@@ -2,30 +2,19 @@
 <html lang="ru">
 
 <head>
-	<meta charset="utf-8">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 	<title>Lemmings Company</title>
-	<link rel="icon" href="{{ url_for('static', filename='images/Lemming.png') }}" type="image/png" />
+	<link rel="icon" href="{{logo}}" type="image/png" />
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/style_main_page.css') }}">
 </head>
 
 <body>
 	<div id="header">
 		<div class="left_head">
-			<img class="logo" src="{{logo}}" alt="Logo" width="50px" height="50px">
+			<a class="log" href="/"><img class="logo" src="{{logo}}" alt="Logo" width="50px" height="50px"></a>
 			<h4 class="logo_name">Lemmings Company</h4>
 		</div>
 		<div class="right_head">
-			<!-- <nav>
-				<ul>
-					<nav>
-						<ul>
-							<li><a class="catalog" href="#Catalog">Каталог</a></li>
-							<li><a class="news">Новости</a></li>
-						</ul>
-					</nav>
-					<li><a class="account" href=""><img src="{{acc}}" width="50px" height="50px"></a></li>
-				</ul>
-			</nav> -->
 			<a class="account" href=""><img src="{{acc}}" width="50px" height="50px"></a>
 			<a class="catalog" href="#Catalog">Каталог</a>
 			<a class="news">Новости</a>
