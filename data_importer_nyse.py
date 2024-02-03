@@ -64,4 +64,4 @@ def generate_both_NYSE(name_company):
     create_data(name_company, 2023, 1, 1, 2024, 1, 1, 3)
 
 if __name__ == "__main__":
-    generate_both_NYSE("AAPL")
+    generate_both_NYSE("ETH-USD")
