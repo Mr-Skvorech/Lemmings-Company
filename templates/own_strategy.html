@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <title> Your Strategy </title>
+        <link rel="icon" href="{{ url_for('static', filename='img/Lemming.png') }}" type="image/png" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style_own_strategy.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+    <body>
+        <header>
+            <div id="header">
+                <div class="left_head">
+                    <a class="log" href="/"><img class="logo" src="{{ url_for('static', filename='img/Lemming.png') }}" alt="Logo" width="50px" height="50px"></a>
+                    <h4 class="logo_name">Lemmings Company</h4>
+                </div>
+                <div class="right_head">
+                    <a class="account" href=""><img src="{{ url_for('static', filename='img/Account.png') }}" width="50px" height="50px"></a>
+                    <a class="catalog" href="#Catalog">Каталог</a>
+                    <a class="news">Новости</a>
+                    <a class="str" href="/yourstrategy">Ваша стратегия</a>
+                </div>
+            </div>
+        </header>
+
+        <div class="main">
+            <div class="text">
+                <h2>Для создания своей стратегии необходимо:</h2>
+                <h2>1) скачать файлы-исходники strategy.py, finance_structures.py, strategy_main.py (из github)</h2>
+                <h2>2) создать файл своей стратегии, в нем - класс стретегии (он обязан быть унаследованным от strategy.Strategy)</h2>
+                <h2>3) добавить свою стротегию в strategy_main.py</h2>
+                <h2>Если вы все правильно сделали, ваша стратегия будет учитываться в выборе оптимальной для любой компании</h2>
+            </div>
+        </div>
+
+    </body>
+</html>
