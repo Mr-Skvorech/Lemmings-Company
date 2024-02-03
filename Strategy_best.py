@@ -28,3 +28,4 @@ def Strategy_visualization(name_company, year_begin, month_begin, day_begin, yea
     plt.savefig(file_name)
     move(file_name, os.getcwd() + '/static/img')
     plt.close()
+    return (networth, soveti, lenth)
