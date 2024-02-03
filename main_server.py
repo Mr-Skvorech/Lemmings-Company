@@ -78,7 +78,7 @@ def home_page():
     kwargs = init_kwargs()
     #
     filename = "list_of_comp" + ".txt"
-    f = open(filename)
+    f = open(filename, encoding="utf-8")
     comp = f.readlines()
     f.close()
     print(*comp)
@@ -123,7 +123,7 @@ def home_page():
 def user(id):
     kwargs = init_kwargs()
     generate_both(id)
-    f = open(os.path.join('companies', id + ".txt"), 'r')
+    f = open(os.path.join('companies', id + ".txt"), 'r', encoding="utf-8")
     data = f.readlines()
     f.close()
     tick = []
