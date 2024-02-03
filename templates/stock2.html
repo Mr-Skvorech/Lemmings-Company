@@ -21,11 +21,11 @@
                     height="50px"></a>
             <a class="catalog" href="#Catalog">Каталог</a>
             <a class="news">Новости</a>
+            <a class="str" href="/yourstrategy">Ваша стратегия</a>
         </div>
     </div>
     <div style="display: flex; 
     justify-content: space-around;
-    border: 5px solid gold;
     padding-bottom: 200px;
     ">
         <img src="{{ url_for('static', filename='img/icon.png') }}"
@@ -41,7 +41,7 @@
     width: 100%; 
     align-items: center;
     ">
-        <img class="graph" src="{{ url_for('static', filename='img/graphic.png') }}">
+        <img class="graph" src="{{ url_for('static', filename='img/graphic.png') }}" style="border: 5px solid black">
     </div>
     <div style="height: 10px;"></div>
     <button type="button" class="btn3"> Совет бота </button>
@@ -54,7 +54,8 @@
         padding-top: 0px;
         align-items: center;
         margin: 0 auto;">
-            <p> {{text}} </p>
+            <h1>Наш прогноз:</h1>
+            <h3>{{ strategy }}</h3>
         </div>
     </div>
     <div style="height: 10px;"></div>
