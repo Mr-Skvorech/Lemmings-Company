@@ -170,6 +170,9 @@ def user_NYSE(id):
     im.save(new_file_name, quality=95)
     return render_template('stock2.html', **kwargs)
 
+@app.route("/yourstrategy")
+def yourstrategy():
+    return render_template("own_strategy.html")
 
 if __name__ == "__main__":
     app.run(port=8080, host="127.0.0.1")
