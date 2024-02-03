@@ -18,18 +18,17 @@ class CompanyManager(object):
     def __init__(self, company, period):
         self.company = company
         self.period = period
-        date_s = datetime.today().strftime('%Y-%m-%d')
-        date_s = date_s.split('-')
+        date = datetime.today()
+        date = date.split('-')
 
-        self.data = create_candles(self.company, int(date_s[0])-2, int(date_s[1]), int(date_s[2]), int(date_s[0]), int(date_s[1]), int(date_s[2]), period)
+        self.data = create_candles(company, int(date[2]), int(date[1]), int(date[0]), int(date[2]) - 1, int(date[1]), int(date[0]), period)
 
     def Process(self):
         matter_peiod = 30
         feed_base = []
-        print(len(self.data))
         for i in range(matter_peiod):
-            feed_base.append(self.data[i])
-        self.strategies =  [MinMaxStrategy(self.period, matter_peiod, feed_base), ThreeSoldiersStrategy(self.period,matter_peiod, feed_base), LongShortTermStrategy(self.period,matter_peiod, feed_base)]
+            feed_base.append(data[i])
+        self.strategies = [MinMaxStrategy(self, self.period, matter_peiod, feed_base), ThreeSoldiersStrategy(self, matter_peiod, feed_base), LongShortTermStrategy(self)]
         graphs = []
         sovets = []
         curbest = -1
@@ -38,14 +37,14 @@ class CompanyManager(object):
         for strategy in self.strategies:
             strategy.AddMoney(1e5)
             graphs.append([1e5 for i in range(matter_peiod)])
-            for i in range(matter_peiod, len(self.data) - 1):
-                strategy.Feed(self.data[i])
-                strategy.Process(Glass(), self.data[i].close)
-                graphs[-1].append(strategy.GetNetForce(self.data[i].close))
-            strategy.Feed(self.data[-1])
-            sovets.append(strategy.Process(Glass(), self.data[-1].close))
-            if (curbestnetforce < strategy.GetNetForce(self.data[-1].close)):
-                curbestnetforce = strategy.GetNetForce(self.data[-1].close)
+            for i in range(matter_peiod, len(data) - 1):
+                strategy.Feed(data[i])
+                strategy.Process(Glass(), data[i].close)
+                graphs[-1].append(strategy.GetNetForce(data[i].close))
+            strategy.Feed(data[-1])
+            sovets.append(strategy.Process(Glass(), data[-1].close))
+            if (curbestnetforce < strategy.GetNetForce(data[-1].close)):
+                curbestnetforce = strategy.GetNetForce(data[-1].close)
                 curbest = id
             id += 1
-        return (graphs[id-1], sovets[id-1], len(self.data))
+        return (graphs[id], sovets[id])

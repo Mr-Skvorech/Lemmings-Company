@@ -29,16 +29,17 @@ class ThreeSoldiersStrategy(Strategy):
         Refactor_Bounds()
 
     def local_Process(self, glass, curprice):
+        coef_go = 0.03
         first = self.feed[-3]
         second = self.feed[-2]
         third = self.feed[-1]
-        buy = min((self.money / 8), self.total_money * 0.10) / curprice
+        buy = min((self.money / 2), self.total_money * 0.40) / curprice
         sell = 0
-        if (first.open - first.close >= 0):
+        if ((-first.open + first.close) / curprice <= coef_go):
             buy = 0
-        if (second.open - second.close >= 0):
+        if ((-second.open + second.close) / curprice <= coef_go):
             buy = 0
-        if (third.open - third.close >= 0):
+        if ((-third.open + third.close) / curprice <= coef_go):
             buy = 0
         if (buy != 0 and (third.open - third.close) / (second.open - second.close) > self.coef_not_factor):
             buy = 0

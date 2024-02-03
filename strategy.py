@@ -75,7 +75,7 @@ class Strategy(object):
             self.AddMoney(ord.quantity * ord.price)
             self.AddStock(-ord.quantity)
         else:
-            if (self.total_money * 0.1 < self.money):
+            if (self.total_money * 0.0 < self.money):
                 self.AddMoney(-ord.quantity * ord.price)
                 self.AddStock(ord.quantity)
 
