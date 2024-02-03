@@ -41,9 +41,19 @@
         <img class="graph" src="{{ url_for('static', filename='img/graphic.png') }}">
     </div>
     <div style="height: 10px;"></div>
-    <button type="button" class="btn"> Совет бота </button>
+    <button type="button" class="btn3"> Совет бота </button>
     <div class="container2">
-        <p>MEOW</p>
+        <img src="{{ url_for('static',filename='img/graphic.png')}}" width="50%">
+        <div style="display: block;
+        text-align: center;
+        position: relative;
+        width: 47%;
+        padding-top: 0px;
+        align-items: center;
+        margin: 0 auto;">
+            <p> {{text}} </p>
+        </div>
+
     </div>
     <div style="height: 10px;"></div>
     <button type="button" class="btn">Таблица операций {{ name }} (id: {{ id }}) </button>
@@ -85,6 +95,19 @@
                     content.style.display = "none";
                 } else {
                     content.style.display = "block";
+                }
+            });
+        }
+        var coll = document.getElementsByClassName("btn3");
+        var i;
+        for (i = 0; i < coll.length; i++) {
+            coll[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "flex") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "flex";
                 }
             });
         }
