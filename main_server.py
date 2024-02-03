@@ -1,5 +1,6 @@
 from flask import Flask, render_template
-from data_importer import generate_both
+from data_importer import generate_both_MOEX
+from data_importer_nyse import generate_both_NYSE
 from PIL import Image
 import os
 
@@ -19,11 +20,11 @@ def init_kwargs():
     kwargs["Яндекс (YNDX)"] = os.path.join(img, 'yandex.png')
     kwargs["МТС (MTSS)"] = os.path.join(img, 'mts.png')
     kwargs["Магнит (MGNT)"] = os.path.join(img, 'magnit.png')
-    kwargs["X5_Retail_group (FIVE)"] = os.path.join(img, 'X5.png')
+    kwargs["X5_Retail_Group (FIVE)"] = os.path.join(img, 'X5.png')
     kwargs["Северсталь (CHMF)"] = os.path.join(img, 'sever.png')
     kwargs["Сургутнефтегаз (SNGS)"] = os.path.join(img, 'surgut.png')
     kwargs["Татнефть (TATN)"] = os.path.join(img, 'tatneft.png')
-    kwargs["Норильский_Никель (GMKN)"] = os.path.join(img, 'nornikel.svg')
+    kwargs["Норильский_Никель (GMKN)"] = os.path.join(img, 'nornikel.png')
     kwargs["Apple (AAPL)"] = os.path.join(img, 'apple.jpg')
     kwargs["Goldman_Sachs_Group (GS)"] = os.path.join(img, 'gold.png')
     kwargs["Visa (V)"] = os.path.join(img, 'visa.webp')
@@ -40,16 +41,16 @@ def init_kwargs():
     kwargs["YNDX"] = "Яндекс"
     kwargs["MTSS"] = "МТС"
     kwargs["MGNT"] = "Магнит"
-    kwargs["FIVE"] = "X5 Retail Group"
+    kwargs["FIVE"] = "X5_Retail_Group"
     kwargs["CHMF"] = "Северсталь"
     kwargs["SNGS"] = "Сургутнефтегаз"
     kwargs["TATN"] = "Татнефть"
-    kwargs["GMKN"] = "Норильский Никель"
+    kwargs["GMKN"] = "Норильский_Никель"
     kwargs["AAPL"] = "Apple"
-    kwargs["GS"] = "Goldman Sachs Group"
+    kwargs["GS"] = "Goldman_Sachs_Group"
     kwargs["V"] = "Visa"
     kwargs["PFE"] = "Pfizer"
-    kwargs["TXN"] = "Texas Instruments"
+    kwargs["TXN"] = "Texas_Instruments"
     #
     kwargs["text_SBER"] = "ПАО Сбербанк является лидером в сфере банковских услуг в России и одним из лидеров среди международных финансовых компаний. Ведущим акционером банка является Министерство финансов РФ. Оно владеет около 52% акций. Остальные 48% находятся в свободном обращении на рынке ценных бумаг. Сбербанк имеет сильные позиции среди конкурентов. Компания работает в более 80 субъектов РФ. В ее структуру входят 11 региональных банков и более 14 тысяч подразделений. Компания является самым дорогим брендом в РФ. Широкий выбор банковских услуг и развитие экосистемы делают Сбербанк желанным партнером для многих компаний."
     kwargs["text_LKOH"] = "ПАО «ЛУКОЙЛ» – нефтяная компания из России, которая занимается добычей, переработкой и продажей нефти. Годовая выручка составляет около 8 трлн рублей. На долю корпорации приходится 1% доказанных мировых запасов нефти и 2% от всемирной добычи. Продукция поставляется в около 100 странах мира. Лукойл позиционирует себя как один из лидеров в области нефтедобычи. У компании внушительные показатели успеха и высокая прибыль. Партнерство с другими предприятиями позволяет добиться хороших результатов и показывать положительную динамику развития. В список партнеров в рамках проектов на территории РФ входят ConocoPhillips и Башнефть. ЛУКОЙЛ разрабатывает месторождения в более 30 странах. Руководство корпорации и менеджеры являются владельцами большой части акций. Согласно рыночной капитализации Лукойл находится на третьем месте среди других компаний с таким же видом деятельности как добыча и переработка нефти. Номинальным держателем акций холдинга является Банк Нью-Йорка, который хранит и ведет учет 61,78% ценных бумаг компании."
@@ -103,7 +104,7 @@ def home_page():
         para = dict()
         para["name"] = sym
         s = ""
-        for i in range(-2, -len(sym), -1):
+        for i in range(-3, -len(sym), -1):
             if (sym[i] == '('):
                 break
             s += sym[i]
@@ -120,9 +121,9 @@ def home_page():
     return render_template("main_page.html", **kwargs)
 
 @app.route("/companyMOEX/<id>")
-def user(id):
+def user_MOEX(id):
     kwargs = init_kwargs()
-    generate_both(id)
+    generate_both_MOEX(id)
     f = open(os.path.join('companies', id + ".txt"), 'r', encoding="utf-8")
     data = f.readlines()
     f.close()
@@ -141,7 +142,31 @@ def user(id):
     im = Image.open(file_name)
     new_file_name = os.path.join(img, 'icon.png')
     im.save(new_file_name, quality=95)
-    return render_template('stock.html', **kwargs)
+    return render_template('stock2.html', **kwargs)
+
+@app.route("/companyNYSE/<id>")
+def user_NYSE(id):
+    kwargs = init_kwargs()
+    generate_both_NYSE(id)
+    f = open(os.path.join('companies', id + ".txt"), 'r', encoding="utf-8")
+    data = f.readlines()
+    f.close()
+    tick = []
+    for i in range(1, len(data)):
+        sym = data[i].split()
+        tick.append(sym)
+    kwargs["args"] = ["DATA", "OPEN", "CLOSE", "LOW", "HIGH", "VALUE", "QUANTITY"]
+    kwargs["name"] = kwargs[id]
+    kwargs["id"] = id
+    # kwargs["image"] = os.path.join(img, id + ".png")
+    s = 'img/' + id + '.png'
+    kwargs["ticker"] = tick
+    kwargs["text"] = kwargs["text_" + id]
+    file_name = kwargs[kwargs["name"] + " (" + id + ")"]
+    im = Image.open(file_name)
+    new_file_name = os.path.join(img, 'icon.png')
+    im.save(new_file_name, quality=95)
+    return render_template('stock2.html', **kwargs)
 
 
 if __name__ == "__main__":

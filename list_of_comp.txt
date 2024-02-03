@@ -8,7 +8,7 @@
 Яндекс (YNDX)
 МТС (MTSS)
 Магнит (MGNT)
-X5_Retail_group (FIVE)
+X5_Retail_Group (FIVE)
 Северсталь (CHMF)
 Сургутнефтегаз (SNGS)
 Татнефть (TATN)

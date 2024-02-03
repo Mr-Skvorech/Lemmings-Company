@@ -34,22 +34,24 @@ def create_data(name_company, year_begin, month_begin, day_begin, year_end, mont
         my_file.write(df_string)
         my_file.close()
     is_exist.close()
+
 def load_graph_to_png(name_company, file_name, year_begin, month_begin, day_begin, year_end, month_end, day_end, inter):
     m1 = MoexImporter()
     file_name = "graphic.png"
     sec = MoexSecurity(name_company, m1)
     candles_df = sec.getCandleQuotesAsDataFrame(date(2023, 1, 1), date(2024, 1, 24),
                                                 interval=MoexCandlePeriods.Period1Day, board=None)
-    mpf.plot(candles_df, type="candle", mav=10, ylabel="price($)", figsize=(9.6,5.4),style="yahoo",
+    mpf.plot(candles_df, type="candle", mav=10, ylabel="price($)", figsize=(19.2,10.8),style="yahoo",
              savefig=file_name)
     im = Image.open(file_name)
-    im.crop((170, 70, 900, 540)).save(file_name, quality=95)
+    im.crop((340, 140, 1800, 1000)).save(file_name, quality=95)
 
     if os.path.exists(os.getcwd() + '/static/img' + '/' + file_name):
         os.remove(os.getcwd() + '/static/img' + '/' + file_name)
     shutil.move(file_name, os.getcwd() + '/static/img')
 
 
-def generate_both(name_company):
+def generate_both_MOEX(name_company):
     load_graph_to_png(name_company, name_company + ".png", 2023, 1, 1, 2024, 1, 1, 3)
     create_data(name_company, 2023, 1, 1, 2024, 1, 1, 3)
+# generate_both("SBER")
