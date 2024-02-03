@@ -5,7 +5,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title> Lemmings Company </title>
     <link rel="icon" href="{{ url_for('static', filename='img/Lemming.png') }}" type="image/png" />
-	<link rel="stylesheet" href="{{ url_for('static', filename='css/style_stock.css') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style_stock2.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
@@ -21,40 +21,54 @@
 			<a class="news">Новости</a>
 		</div>
 	</div>
-    <div class="suf_header" style="display: flex; justify-content: space-around; border: 5px solid gold;">
+    <div style="display: flex; 
+    justify-content: space-around;
+    border: 5px solid gold;
+    padding-bottom: 200px;
+    ">
         <img src="{{ url_for('static', filename='img/icon.png') }}" style="border-radius: 100px; box-shadow: 0 0 0 3px green, 0 0 13px #333; top: 163px; width: 200px; height: 200px; position: relative; left: 50px;">
-        <!-- <button type="button" class="btn2">Описание </button> -->
+        <button type="button" class="btn2">Описание </button>
         <div class="container">
             <p>{{ text }}</p>
         </div>
     </div>
-    <div class="cont_graph">
-        <img class="graph" src="{{ url_for('static', filename='img/graphic.png') }}" alt="graphic">
+    <div style="
+    display: flex;
+    justify-content: space-around;
+    width: 100%; 
+    align-items: center;
+    ">
+        <img class="graph" src="{{ url_for('static', filename='img/graphic.png') }}">
     </div>
-    <div class="tables">
-        <!-- <button type="button" class="btn">Таблица операций {{ name }} (id: {{ id }}) </button> -->
-        <div class="container2">
-            <table border="1" class="center">
-                <thead>
+    <div style="height: 10px;"></div>
+    <button type="button" class="btn"> Совет бота </button>
+    <div class="container2">
+        <p>MEOW</p>
+    </div>
+    <div style="height: 10px;"></div>
+    <button type="button" class="btn">Таблица операций {{ name }} (id: {{ id }}) </button>
+    <div class="container2">
+        <!-- <img class="graph" src="{{ url_for('static', filename='img/graphic.png') }}" alt="graphic"> -->
+        <table border="1" class="center">
+            <thead>
+                <tr>
+                    {% for row in args %}
+                    <th>
+                        <h1> {{ row }}</h1>
+                    </th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in ticker %}
                     <tr>
-                        {% for row in args %}
-                        <th>
-                            <h1> {{ row }}</h1>
-                        </th>
+                        {% for item in row %}
+                            <td> {{ item }} </td>
                         {% endfor %}
                     </tr>
-                </thead>
-                <tbody>
-                    {% for row in ticker %}
-                        <tr>
-                            {% for item in row %}
-                                <td> {{ item }} </td>
-                            {% endfor %}
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
 
