@@ -1,6 +1,5 @@
 from moeximporter import MoexImporter, MoexSecurity, MoexCandlePeriods
 from datetime import date
-import mplfinance as mpf
 from finance_structures import *
 
 periods = dict()

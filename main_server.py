@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from data_importer import generate_both_MOEX
 from data_importer_nyse import generate_both_NYSE
 from PIL import Image
+from Strategy_best import *
 import os
 
 app = Flask(__name__)
@@ -142,6 +143,7 @@ def user_MOEX(id):
     im = Image.open(file_name)
     new_file_name = os.path.join(img, 'icon.png')
     im.save(new_file_name, quality=95)
+    Strategy_visualization(id, 2022,1,1,2024,1,1,3)
     return render_template('stock2.html', **kwargs)
 
 @app.route("/companyNYSE/<id>")
