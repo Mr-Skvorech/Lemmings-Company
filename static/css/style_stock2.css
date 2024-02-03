@@ -98,7 +98,6 @@
     align-items: center;
     margin: 0 auto;
     vertical-align: middle;
-    background-color:#b8d5a5;
 }
 
 .btn {
@@ -127,21 +126,6 @@
     height: 100%;
     width: 60%;
     left: 0%;
-    /* align-items: center; */
-    text-align: center;
-    margin: 0 auto;
-    display: block;
-}
-.btn3 {
-    font-size: 30px;
-    border: 5px solid black;
-    outline: none;
-    background-color: #A8C397;
-    color: black;
-    top: 200px;
-    position: relative;
-    height: 100%;
-    width: 60%;
     /* align-items: center; */
     text-align: center;
     margin: 0 auto;
