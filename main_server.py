@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from data_importer import generate_both_MOEX
 from data_importer_nyse import generate_both_NYSE
 from PIL import Image
+from Strategy_best import *
 import os
 
 app = Flask(__name__)
@@ -30,11 +31,6 @@ def init_kwargs():
     kwargs["Visa (V)"] = os.path.join(img, 'visa.webp')
     kwargs["Pfizer (PFE)"] = os.path.join(img, 'pfizer.jpg')
     kwargs["Texas_Instruments (TXN)"] = os.path.join(img, 'texas.png')
-    kwargs["Bitcoin (BTC-USD)"] = os.path.join(img, 'bitcoin.png')
-    kwargs["Ethereum (ETH-USD)"] = os.path.join(img, 'ethereum.png')
-    kwargs["Dogecoin (DOGE-USD)"] = os.path.join(img, 'doge_coin.png')
-    kwargs["Shiba_Inu (SHIB-USD)"] = os.path.join(img, 'shibainu.png')
-    kwargs["Solana (SOL-USD)"] = os.path.join(img, 'solana.png')
     # 
     kwargs["SBER"] = "Сбербанк"
     kwargs["LKOH"] = "Лукойл"
@@ -56,16 +52,6 @@ def init_kwargs():
     kwargs["V"] = "Visa"
     kwargs["PFE"] = "Pfizer"
     kwargs["TXN"] = "Texas_Instruments"
-    kwargs["AAPL"] = "Apple"
-    kwargs["GS"] = "Goldman_Sachs_Group"
-    kwargs["V"] = "Visa"
-    kwargs["PFE"] = "Pfizer"
-    kwargs["TXN"] = "Texas_Instruments"
-    kwargs["BTC-USD"] = "Bitcoin"
-    kwargs["ETH-USD"] = "Ethereum"
-    kwargs["DOGE-USD"] = "Dogecoin"
-    kwargs["SHIB-USD"] = "Shiba_Inu"
-    kwargs["SOL-USD"] = "Solana"
     #
     kwargs["text_SBER"] = "ПАО Сбербанк является лидером в сфере банковских услуг в России и одним из лидеров среди международных финансовых компаний. Ведущим акционером банка является Министерство финансов РФ. Оно владеет около 52% акций. Остальные 48% находятся в свободном обращении на рынке ценных бумаг. Сбербанк имеет сильные позиции среди конкурентов. Компания работает в более 80 субъектов РФ. В ее структуру входят 11 региональных банков и более 14 тысяч подразделений. Компания является самым дорогим брендом в РФ. Широкий выбор банковских услуг и развитие экосистемы делают Сбербанк желанным партнером для многих компаний."
     kwargs["text_LKOH"] = "ПАО «ЛУКОЙЛ» – нефтяная компания из России, которая занимается добычей, переработкой и продажей нефти. Годовая выручка составляет около 8 трлн рублей. На долю корпорации приходится 1% доказанных мировых запасов нефти и 2% от всемирной добычи. Продукция поставляется в около 100 странах мира. Лукойл позиционирует себя как один из лидеров в области нефтедобычи. У компании внушительные показатели успеха и высокая прибыль. Партнерство с другими предприятиями позволяет добиться хороших результатов и показывать положительную динамику развития. В список партнеров в рамках проектов на территории РФ входят ConocoPhillips и Башнефть. ЛУКОЙЛ разрабатывает месторождения в более 30 странах. Руководство корпорации и менеджеры являются владельцами большой части акций. Согласно рыночной капитализации Лукойл находится на третьем месте среди других компаний с таким же видом деятельности как добыча и переработка нефти. Номинальным держателем акций холдинга является Банк Нью-Йорка, который хранит и ведет учет 61,78% ценных бумаг компании."
@@ -87,11 +73,6 @@ def init_kwargs():
     kwargs["text_V"] = "Visa, Inc. занимается предоставлением услуг цифровых платежей. Компания также способствует глобальной торговле за счет передачи ценностей и информации между глобальной сетью потребителей, продавцов, финансовых учреждений, предприятий, стратегических партнеров и государственных структур. Компания предлагает дебетовую карту, кредитную карту, предоплаченные продукты, коммерческие платежные решения и глобальные банкоматы. Компания была основана Ди Хоком в 1958 году, ее штаб-квартира находится в Сан-Франциско, Калифорния."
     kwargs["text_PFE"] = "Pfizer Inc. — одна из крупнейших в мире фармацевтических компаний с годовым объемом продаж около 50 миллиардов долларов (без учета продаж вакцины против COVID-19). Хотя исторически компания продавала многие виды товаров медицинского назначения и химикатов, сейчас на рецептурные лекарства и вакцины приходится большая часть продаж."
     kwargs["text_TXN"] = "Texas Instruments Incorporated занимается разработкой и производством полупроводниковых решений для аналоговых и цифровых встраиваемых систем и обработки приложений. Компания работает через следующие сегменты: аналоговая и встроенная обработка. Полупроводники аналогового сегмента изменяют реальные сигналы, такие как звук, температура, давление или изображения, путем их кондиционирования, усиления и часто преобразования в поток цифровых данных, которые могут обрабатываться другими полупроводниками, такими как встроенные процессоры. Сегмент Embedded Processing предназначен для решения конкретных задач и может быть оптимизирован для различных комбинаций производительности, мощности и стоимости в зависимости от приложения. Компания была основана Сесилом Х. Грином, Патриком Юджином Хаггерти, Джоном Эриком Джонссоном и Юджином Макдермоттом в 1930 году, и ее штаб-квартира находится в Далласе, штат Техас."
-    kwargs["text_BTC-USD"] = "Одна из многочисленных криптовалют"
-    kwargs["text_ETH-USD"] = "Одна из многочисленных криптовалют"
-    kwargs["text_DOGE-USD"] = "Одна из многочисленных криптовалют"
-    kwargs["text_SHIB-USD"] = "Одна из многочисленных криптовалют"
-    kwargs["text_SOL-USD"] = "Одна из многочисленных криптовалют"
     return kwargs
 
 @app.route("/")
@@ -134,30 +115,11 @@ def home_page():
         para["fil"] = kwargs.get(sym[0:len(sym) - 1], os.path.join(img, 'sberr.png'))
         para["link"] = "/companyNYSE/" + para["ticker"]
         stock.append(para)
-    for i in range(20, 25):
-        sym = comp[i]
-        para = dict()
-        para["name"] = sym
-        s = ""
-        for i in range(-3, -len(sym), -1):
-            if (sym[i] == '('):
-                break
-            s += sym[i]
-        s = s[::-1]
-        print(sym[0:len(sym) - 1])
-        para["ticker"] = s
-        para["fil"] = kwargs.get(sym[0:len(sym) - 1], os.path.join(img, 'sberr.png'))
-        para["link"] = "/cryptocurrency/" + para["ticker"]
-        stock.append(para)
     kwargs["stock"] = stock
     kwargs["logo"] = os.path.join(img, 'Lemming.png')
     kwargs["acc"] = os.path.join(img, "Account.png")
     #
     return render_template("main_page.html", **kwargs)
-
-@app.route("/yourstrategy")
-def yourstrategy():
-    return render_template("own_strategy.html")
 
 @app.route("/companyMOEX/<id>")
 def user_MOEX(id):
@@ -181,34 +143,11 @@ def user_MOEX(id):
     im = Image.open(file_name)
     new_file_name = os.path.join(img, 'icon.png')
     im.save(new_file_name, quality=95)
+    Strategy_visualization(id, 2022,1,1,2024,1,1,3)
     return render_template('stock2.html', **kwargs)
 
 @app.route("/companyNYSE/<id>")
 def user_NYSE(id):
-    kwargs = init_kwargs()
-    generate_both_NYSE(id)
-    f = open(os.path.join('companies', id + ".txt"), 'r', encoding="utf-8")
-    data = f.readlines()
-    f.close()
-    tick = []
-    for i in range(1, len(data)):
-        sym = data[i].split()
-        tick.append(sym)
-    kwargs["args"] = ["DATA", "OPEN", "CLOSE", "LOW", "HIGH", "VALUE", "QUANTITY"]
-    kwargs["name"] = kwargs[id]
-    kwargs["id"] = id
-    # kwargs["image"] = os.path.join(img, id + ".png")
-    s = 'img/' + id + '.png'
-    kwargs["ticker"] = tick
-    kwargs["text"] = kwargs["text_" + id]
-    file_name = kwargs[kwargs["name"] + " (" + id + ")"]
-    im = Image.open(file_name)
-    new_file_name = os.path.join(img, 'icon.png')
-    im.save(new_file_name, quality=95)
-    return render_template('stock2.html', **kwargs)
-
-@app.route("/cryptocurrency/<id>")
-def user_crypt(id):
     kwargs = init_kwargs()
     generate_both_NYSE(id)
     f = open(os.path.join('companies', id + ".txt"), 'r', encoding="utf-8")
