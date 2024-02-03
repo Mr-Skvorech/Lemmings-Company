@@ -64,65 +64,40 @@
 
 /* end header */
 
-.cont_graph {
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    border: 5px solid #F8E391;
-}
-
-.cont_graph p {
-    margin: 0 auto;
-}
-
 .graph {
-    margin: 0 auto;
-}
-
-.suf_header {
-    height: 400px;
+    
 }
 
 .container {
-    display: inline-block;
+    display: none;
     text-align: center;
     /* border: 5px; */
     position: relative;
     border: 5px solid black;
     /* left: 1%; */
     width: 47%;
-    height: 60%;
+    height: auto;
     padding-top: 0px;
-    padding-left: 15px;
-    padding-right: 15px;
     top: 150px;
     background-color:#b8d5a5;
     align-items: center;
     margin: 0 auto;
 }
 
-.tables {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 10px;
-}
-
 .container2 {
-    display: block;
+    display: none;
     text-align: center;
     /* border: 5px; */
-    /* position: relative; */
+    position: relative;
     border: 5px solid green;
     /* left: 10%; */
     width: 70%;
     height: auto;
-    margin-top: 10px;
+    padding-top: 0px;
+    top: 200px;
     align-items: center;
+    margin: 0 auto;
+    vertical-align: middle;
 }
 
 .btn {
@@ -132,7 +107,7 @@
     background-color: #A8C397;
     color: black;
     top: 200px;
-    /* position: relative; */
+    position: relative;
     height: 100%;
     width: 60%;
     /* align-items: center; */
@@ -140,8 +115,7 @@
     margin: 0 auto;
     display: block;
 }
-
-/* .btn2 {
+.btn2 {
     font-size: 30px;
     border: 5px solid black;
     outline: none;
@@ -149,15 +123,14 @@
     color: black;
     top: 150px;
     position: relative;
-    height: 40%;
+    height: 100%;
     width: 60%;
     left: 0%;
-    align-items: center;
+    /* align-items: center; */
     text-align: center;
     margin: 0 auto;
     display: block;
-} */
-
+}
 .btn:hover, .btn2:hover {
     /* TODO : поменять цвет */
     background: #E7E09E;
