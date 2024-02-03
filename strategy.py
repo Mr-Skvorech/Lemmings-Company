@@ -61,7 +61,8 @@ class Strategy(object):
 
     def AddMoney(self, x):
         self.money += x
-        self.total_money += x
+        if (x > 0):
+            self.total_money += x
 
     def AddStock(self, x):
         self.number_of_stocks += x
@@ -74,10 +75,15 @@ class Strategy(object):
             self.AddMoney(ord.quantity * ord.price)
             self.AddStock(-ord.quantity)
         else:
-            self.AddMoney(-ord.quantity * ord.price)
-            self.AddStock(ord.quantity)
+            if (self.total_money * 0.1 < self.money):
+                self.AddMoney(-ord.quantity * ord.price)
+                self.AddStock(ord.quantity)
 
     def GetActiveMoney(self):
         return self.money
+
     def GetActiveStock(self):
         return self.number_of_stocks
+
+    def GetNetForce(self, curprice):
+        return self.money + self.number_of_stocks * curprice

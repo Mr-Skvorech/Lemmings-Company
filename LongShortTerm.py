@@ -22,3 +22,6 @@ class LongShortTermStrategy(Strategy):
 
     def GetActiveStock(self):
         return self.short.GetActiveStock() + self.long.GetActiveStock()
+
+    def GetNetForce(self, curprice):
+        return self.short.GetNetForce(curprice) + self.long.GetNetForce(curprice)
